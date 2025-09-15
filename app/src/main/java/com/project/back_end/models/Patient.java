@@ -11,7 +11,9 @@ public class Patient {
 //      - Represents the unique identifier for each patient.
 //      - The @Id annotation marks it as the primary key.
 //      - The @GeneratedValue(strategy = GenerationType.IDENTITY) annotation auto-generates the ID value when a new record is inserted into the database.
-
+      @Id 
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
+      private Long id;
 // 2. 'name' field:
 //    - Type: private String
 //    - Description:
@@ -19,7 +21,9 @@ public class Patient {
 //      - The @NotNull annotation ensures that the patient's name is required.
 //      - The @Size(min = 3, max = 100) annotation ensures that the name length is between 3 and 100 characters. 
 //      - Provides validation for correct input and user experience.
-
+      @NotNull
+      @Size(min = 3, max = 100)
+      private String name;
 
 // 3. 'email' field:
 //    - Type: private String
@@ -27,28 +31,36 @@ public class Patient {
 //      - Represents the patient's email address.
 //      - The @NotNull annotation ensures that an email address must be provided.
 //      - The @Email annotation validates that the email address follows a valid email format (e.g., patient@example.com).
-
-// 4. 'password' field:
+      @NotNull
+      @Email
+      private String email;// 4. 'password' field:
 //    - Type: private String
 //    - Description:
 //      - Represents the patient's password for login authentication.
 //      - The @NotNull annotation ensures that a password must be provided.
 //      - The @Size(min = 6) annotation ensures that the password must be at least 6 characters long.
 
-// 5. 'phone' field:
+      @NotNull
+      @Size(min = 6)
+      private String password;// 5. 'phone' field:
 //    - Type: private String
 //    - Description:
 //      - Represents the patient's phone number.
 //      - The @NotNull annotation ensures that a phone number must be provided.
 //      - The @Pattern(regexp = "^[0-9]{10}$") annotation validates that the phone number must be exactly 10 digits long.
 
-// 6. 'address' field:
+      @NotNull
+      @Pattern(regexp = "^[0-9]{10}$")
+      private String phone;
+      // 6. 'address' field:
 //    - Type: private String
 //    - Description:
 //      - Represents the patient's address.
 //      - The @NotNull annotation ensures that the address must be provided.
 //      - The @Size(max = 255) annotation ensures that the address does not exceed 255 characters in length, providing validation for the address input.
-
+      @NotNull
+      @Size(max = 255)
+      private String address;
 
 // 7. Getters and Setters:
 //    - Standard getter and setter methods are provided for all fields: id, name, email, password, phone, and address.
