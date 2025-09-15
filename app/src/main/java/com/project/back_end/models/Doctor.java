@@ -80,9 +80,7 @@ public class Doctor {
       public Long getId(){
          return id;
       }
-      public void setId(Long id){
-        this.id = id;
-      }
+      
       public String getName(){
         return name;
       }
@@ -118,6 +116,6 @@ public class Doctor {
       }
       public void setAvailableTimes(List<String> availableTimes){
         this.availableTimes = availableTimes;
-      }id
+      }
  }
 

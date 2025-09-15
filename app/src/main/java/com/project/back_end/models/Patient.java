@@ -1,5 +1,6 @@
 package com.project.back_end.models;
 
+@Entity 
 public class Patient {
 // @Entity annotation:
 //    - Marks the class as a JPA entity, meaning it represents a table in the database.
@@ -66,6 +67,40 @@ public class Patient {
 //    - Standard getter and setter methods are provided for all fields: id, name, email, password, phone, and address.
 //    - These methods allow access and modification of the fields of the Patient class.
 
-  
+      public Long getId(){
+        return id;
+      }
+      
+      public String getName(){
+        return name;
+      }
+      public void setName(String name){
+        this.name = name;
+
+      }
+      public String getEmail(){
+        return email;
+      }
+      public void setEmail(String email){
+        this.email = email;
+      }
+      public String getPassword(){
+        return password;
+      }
+      public void setPassword(String password){
+        this.password = password;
+      }
+      public String getPhone(){
+        return phone;
+      }
+      public void setPhone(String phone){
+        this.phone = phone;
+      }
+      public String getAddress(){
+        return address;
+      }
+      public void setAddress(String address){
+        this.address = address;
+      }
 
 }
