@@ -2,7 +2,15 @@ package com.project.back_end.models;
 
 import java.beans.Transient;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.LocalDate;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
+import java.lang.annotation.Inherited;
+
+@Entity 
 public class Appointment {
 
   // @Entity annotation:
@@ -16,7 +24,7 @@ public class Appointment {
 //      - The @Id annotation marks it as the primary key.
 //      - The @GeneratedValue(strategy = GenerationType.IDENTITY) annotation auto-generates the ID value when a new record is inserted into the database.
         @Id
-        @GeneratedValue
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 // 2. 'doctor' field:
 //    - Type: private Doctor

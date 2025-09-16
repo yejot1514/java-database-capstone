@@ -1,5 +1,9 @@
 package com.project.back_end.models;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import java.lang.annotation.Inherited;
+
 @Entity 
 public class Patient {
 // @Entity annotation:

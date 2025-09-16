@@ -2,6 +2,8 @@ package com.project.back_end.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.lang.annotation.Inherited;
 
 
@@ -53,6 +55,9 @@ public class Admin {
      
       public Long getId(){
         return id;
+      }
+      public void setId(Long id){
+        this.id = id;
       }
       public void setUsername(String username)    {
         this.username = username;

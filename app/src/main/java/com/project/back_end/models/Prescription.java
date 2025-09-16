@@ -1,5 +1,11 @@
 package com.project.back_end.models;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
+import jakarta.validation.constraints.*;
+
 @Document(collection = "prescriptions")
 public class Prescription {
 
@@ -66,7 +72,10 @@ public class Prescription {
 //    - Standard getter and setter methods are provided for all fields: id, patientName, medication, dosage, doctorNotes, and appointmentId.
 //    - These methods allow access and modification of the fields of the Prescription class.
       public String getId(){
-        return Id;
+        return id;
+      }
+      public void setId(String id){
+        this.id = id;
       }
       public String getPatientName(){
         return patientName;

@@ -1,6 +1,11 @@
 package com.project.back_end.models;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.lang.annotation.Inherited;
+
+import java.util.*;
 
 @Entity
 public class Doctor {
@@ -80,7 +85,9 @@ public class Doctor {
       public Long getId(){
          return id;
       }
-      
+      public void setId(Long id){
+        this.id = id;
+      }
       public String getName(){
         return name;
       }
