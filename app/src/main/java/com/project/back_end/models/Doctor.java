@@ -2,9 +2,10 @@ package com.project.back_end.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.lang.annotation.Inherited;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.lang.annotation.Inherited;
 import java.util.*;
 
 @Entity
@@ -42,7 +43,7 @@ public class Doctor {
 //      - The @Size(min = 3, max = 50) annotation ensures that the specialty name is between 3 and 50 characters long.
       @NotNull
       @Size(min = 3, max = 50)
-      private String speciality;
+      private String specialty;
 // 4. 'email' field:
 //    - Type: private String
 //    - Description:
@@ -80,6 +81,15 @@ public class Doctor {
 //      - The @ElementCollection annotation ensures that the list of time slots is stored as a separate collection in the database.
       @ElementCollection
       private List<String> availableTimes;
+
+      public Doctor(String name, String specialty, String email, String password, String phone, List<String> availableTimes){
+              this.name = name;
+              this.specialty = specialty;
+              this.email = email;
+              this.password = password;
+              this.phone = phone;
+              this.availableTimes = availableTimes;
+      }
 // 8. Getters and Setters:
 //    - Standard getter and setter methods are provided for all fields: id, name, specialty, email, password, phone, and availableTimes.
       public Long getId(){
@@ -94,11 +104,11 @@ public class Doctor {
       public void setName(String name){
         this.name = name;
       }
-      public String getSpeciality(){
-        return speciality;
+      public String getSpecialty(){
+        return specialty;
       }
-      public void setSpeciality(String speciality){
-        this.speciality = speciality;
+      public void setSpecialty(String specialty){
+        this.specialty = specialty;
       }
       public String getEmail(){
         return email;
