@@ -63,3 +63,168 @@
 
 Let me know if you'd like a consolidated style guide for the entire HospitalCRM frontend.
  */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 30px;
+  text-align: center;
+  background-color: #f4fdfd;
+}
+
+.searchBar {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  width: 60%;
+  max-width: 500px;
+}
+
+.filter-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.today-btn,
+.adminBtn {
+  background-color: #015c5d;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.today-btn:hover,
+.adminBtn:hover {
+  background-color: #017d7e;
+}
+
+.datePicker,
+.date-picker {
+  margin-left: 10px;
+  padding: 10px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: sans-serif;
+}
+
+thead {
+background-color: #33333380;
+ color: #fff;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f959;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffffc0;
+}
+
+tbody tr:hover {
+  background-color: #015c5d39;
+}
+
+.prescription-btn {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.prescription-btn:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+.prescription-btn:active {
+  transform: scale(0.95);
+}
+
+.noPatientRecord {
+  font-size: 16px;
+  font-style: italic;
+  color: gray;
+  margin-top: 20px;
+}
+
+.table-header {
+  font-size: 24px;
+  color: #015c5d;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .searchBar {
+    width: 90%;
+    font-size: 14px;
+  }
+
+  .filter-section {
+    flex-direction: column;
+  }
+
+  .today-btn,
+  .adminBtn {
+    width: 80%;
+  }
+
+  .patient-table {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchBar {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .datePicker {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .today-btn {
+    width: 100%;
+  }
+}
