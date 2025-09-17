@@ -124,9 +124,9 @@ and triggers modal-based login functionality.
                     <main class="main-content">
                         <h2>Select Your Role</h2>
                         <div class="role-buttons">
-                        <button id="adminBtn" onclick="selectRole('admin')">Admin</button>
-                        <button id="doctorBtn" onclick="selectRole('doctor')">Doctor</button>
-                        <button id="patientBtn" onclick="selectRole('patient')">Patient</button>
+                        <button id="adminLoginBtn" class="role-button">Admin</button>
+                        <button id="doctorLoginBtn" class="role-button">Doctor</button>
+                        <button id="patientLoginBtn" class="role-button-">Patient</button>
                         </div>
                     </main>
                     <div id="footer"></div>
@@ -134,7 +134,7 @@ and triggers modal-based login functionality.
             
         </div>
         <div id="modal" class="modal">
-            <span class="close-button" id="closeModal"></span>
+            <span class="close-button" id="closeModal">&times;</span>
             <div id="modal-body">
 
             </div>
