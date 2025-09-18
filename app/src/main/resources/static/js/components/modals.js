@@ -57,23 +57,24 @@ export function openModal(type) {
     `;
 
   } else if (type === 'adminLogin') {
+    window.alert("where is the dov");
     modalContent = `
         <h2>Admin Login</h2>
         <input type="text" id="adminUsername" name="username" placeholder="Username" class="input-field">
         <input type="password" id="adminPassword" name="password" placeholder="Password" class="input-field">
-        <button class="dashboard-btn" id="adminLoginBtn" >Login</button>
+        <button class="dashboard-btn" id="adminLoginBtn2" >Login</button>
       `;
   } else if (type === 'doctorLogin') {
     modalContent = `
         <h2>Doctor Login</h2>
         <input type="text" id="email" placeholder="Email" class="input-field">
         <input type="password" id="password" placeholder="Password" class="input-field">
-        <button class="dashboard-btn" id="doctorLoginBtn" >Login</button>
+        <button class="dashboard-btn" id="doctorLoginBtn2" >Login</button>
       `;
   }
 
   document.getElementById('modal-body').innerHTML = modalContent;
-  document.getElementById('modal').style.display = 'block';
+  document.getElementById('modal').style.display ="block";
 
   document.getElementById('closeModal').onclick = () => {
     document.getElementById('modal').style.display = 'none';
@@ -92,10 +93,10 @@ export function openModal(type) {
   }
 
   if (type === 'adminLogin') {
-    document.getElementById('adminLoginBtn').addEventListener('click', adminLoginHandler);
+    document.getElementById('adminLoginBtn2').addEventListener('click', adminLoginHandler);
   }
 
   if (type === 'doctorLogin') {
-    document.getElementById('doctorLoginBtn').addEventListener('click', doctorLoginHandler);
+    document.getElementById('doctorLoginBtn2').addEventListener('click', doctorLoginHandler);
   }
 }

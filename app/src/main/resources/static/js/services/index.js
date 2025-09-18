@@ -56,17 +56,21 @@
     - Log the error to the console
     - Show a generic error message
 */
-import { openModal } from './modal.js';
-import { BASE_API_URL } from './config.js';
+import { openModal } from '../components/modals.js';
+import { API_BASE_URL } from '../config/config.js';
 
-const ADMIN_API = `${BASE_API_URL}/admin/login`;
-const DOCTOR_API = `${BASE_API_URL}/doctor/login`;
+//const ADMIN_API = `${BASE_API_URL}/admin/login`;
+const ADMIN_API = API_BASE_URL + '/admin/login';
+//const DOCTOR_API = `${BASE_API_URL}/doctor/login`;
+const DOCTOR_API = API_BASE_URL + '/doctor/login'
 
-window.onload = () => {
-  const adminLoginBtn = document.getElementById('adminLoginBtn');
+window.onload = function() {
+  alert("jascript started");
+  const adminLoginBtn = document.getElementById("adminLoginBtn");
   const doctorLoginBtn = document.getElementById('doctorLoginBtn');
 
   if (adminLoginBtn) {
+    alert("admin button clicked");
     adminLoginBtn.addEventListener('click', () => openModal('adminLogin'));
   }
 

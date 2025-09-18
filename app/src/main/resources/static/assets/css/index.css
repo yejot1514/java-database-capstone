@@ -54,8 +54,7 @@
 * { 
     margin: 0;
     padding: 0; 
-    box-sizing: 
-    border-box; 
+    box-sizing: border-box; 
   }
 
   html, body {
@@ -94,8 +93,8 @@ h2 {
 
 .role-buttons {
   display: flex;
-  flex-direction: center;
-  gap: 20px;
+  flex-direction: column;
+  /*gap: 20px;*/
   justify-content: center;
   align-items: center;
 }

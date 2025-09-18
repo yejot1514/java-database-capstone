@@ -118,8 +118,7 @@ and triggers modal-based login functionality.
     </head>   
     <body>
         <div class="container">
-            
-                <div class="wrapper">
+            <div class="wrapper">
                     <div id="header"></div>
                     <main class="main-content">
                         <h2>Select Your Role</h2>
@@ -129,9 +128,8 @@ and triggers modal-based login functionality.
                         <button id="patientLoginBtn" class="role-button-">Patient</button>
                         </div>
                     </main>
-                    <div id="footer"></div>
-                </div>
-            
+                    <!--<div id="footer"></div>-->
+            </div>
         </div>
         <div id="modal" class="modal">
             <span class="close-button" id="closeModal">&times;</span>
@@ -139,6 +137,8 @@ and triggers modal-based login functionality.
 
             </div>
         </div>
-        <script  src="../js/services/index.js" defer></script>
+       
+        <script  type="module" src="../js/services/index.js" defer></script>
+        
     </body>
 </html>
