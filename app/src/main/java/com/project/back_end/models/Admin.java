@@ -68,7 +68,7 @@ public class Admin {
       public void setPassword(String password){
         this.password = password;
       }
-      public String getPassord(){
+      public String getPassword(){
         return password;
       }
 }

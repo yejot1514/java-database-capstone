@@ -58,7 +58,7 @@ public class AppointmentDTO {
 //    - Description:
 //      - Represents the scheduled date and time of the appointment.
 //      - The time when the appointment is supposed to happen, stored as a LocalDateTime object.
-      private LocalDateTime appointmenTime;
+      private LocalDateTime appointmentTime;
 // 10. 'status' field:
 //    - Type: private int
 //    - Description:
