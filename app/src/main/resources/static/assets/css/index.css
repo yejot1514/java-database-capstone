@@ -92,10 +92,12 @@ h2 {
   background-attachment: fixed;
 }
 
-.button-group {
+.role-buttons {
   display: flex;
+  flex-direction: center;
   gap: 20px;
   justify-content: center;
+  align-items: center;
 }
 
 button {
