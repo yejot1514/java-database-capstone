@@ -5,6 +5,7 @@ import com.project.back_end.DTO.Login;
 import com.project.back_end.models.Admin;
 import com.project.back_end.models.Doctor;
 import com.project.back_end.models.Patient;
+import com.project.back_end.models.Appointment;
 import com.project.back_end.repo.AdminRepository;
 import com.project.back_end.repo.DoctorRepository;
 import com.project.back_end.repo.PatientRepository;
@@ -142,6 +143,7 @@ public final TokenService tokenService;
         try {
             Admin admin = adminRepository.findByUsername(receivedAdmin.getUsername());
             if (admin != null) {
+                System.out.println("yes admin");
                 if (admin.getPassword().equals(receivedAdmin.getPassword())) {
                     map.put("token", tokenService.generateToken(admin.getUsername()));
                     return ResponseEntity.status(HttpStatus.OK).body(map);
@@ -151,6 +153,7 @@ public final TokenService tokenService;
                 }
             }
             map.put("error", "invalid email id");
+            System.out.println("no admin");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
 
         } catch (Exception e) {
@@ -184,13 +187,27 @@ public final TokenService tokenService;
     }
 
     
-    //@SuppressWarnings("unlikely-arg-type")
-    public int validateAppointment(Long doctorId, LocalDate date, LocalTime time) {
-        Optional<Doctor> optional = doctorRepository.findById(doctorId);
-        if (optional.isEmpty()) return -1;
+     public int validateAppointment(Appointment appointment) {
+        Doctor doctor = appointment.getDoctor();
+        Optional<Doctor> result = doctorRepository.findById(doctor.getId());
+        if (result.isEmpty()) {
+            return -1;
+        }
+        LocalDate appointmentDate = appointment.getAppointmentDate();
+        LocalTime appointmentTime = appointment.getAppointmentTimeOnly();
+        List<String> availableTime = doctorService.getDoctorAvailability(doctor.getId(), appointmentDate);
 
-        List<String> availableSlots = doctorService.getDoctorAvailability(doctorId, java.sql.Date.valueOf(date));
-        return availableSlots.contains(time) ? 1 : 0;
+        for (String timeSlot : availableTime) {
+            String[] times = timeSlot.split("-");
+            LocalTime startTime = LocalTime.parse(times[0]);
+
+            if (appointmentTime.equals(startTime)) {
+                return 1;
+            }
+
+        }
+
+        return 0;
     }
 
     
@@ -202,10 +219,10 @@ public final TokenService tokenService;
     public ResponseEntity<Map<String, String>> validatePatientLogin(Login login) {
         Map<String, String> map = new HashMap<>();
         try {
-            Patient result = patientRepository.findByEmail(login.getEmail());
+            Patient result = patientRepository.findByEmail(login.getIdentifier());
             if (result != null) {
                 if (result.getPassword().equals(login.getPassword())) {
-                    map.put("token", tokenService.generateToken(login.getEmail()));
+                    map.put("token", tokenService.generateToken(login.getIdentifier()));
                     return ResponseEntity.status(HttpStatus.OK).body(map);
                 } else {
                     map.put("error", "Password does not match");

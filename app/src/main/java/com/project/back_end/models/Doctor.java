@@ -82,6 +82,8 @@ public class Doctor {
       @ElementCollection
       private List<String> availableTimes;
 
+      public Doctor(){}
+
       public Doctor(String name, String specialty, String email, String password, String phone, List<String> availableTimes){
               this.name = name;
               this.specialty = specialty;

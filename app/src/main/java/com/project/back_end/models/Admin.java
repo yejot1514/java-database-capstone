@@ -52,6 +52,8 @@ public class Admin {
       @NotNull(message = "password cannot be null")
       private String password;
       
+     public Admin(){}
+
       public Admin(String username, String password) {
         this.username = username;
         this.password = password;

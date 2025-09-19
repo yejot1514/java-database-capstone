@@ -70,7 +70,7 @@ public class Appointment {
 //      - It calculates the end time of the appointment by adding one hour to the start time (appointmentTime).
 //      - It is used to get an estimated appointment end time for display purposes.
       @Transient
-      private LocalDateTime getEndTime(){
+      public LocalDateTime getEndTime(){
             return this.appointmentTime.plusHours(1);
       }
 // 7. 'getAppointmentDate' method:
@@ -79,7 +79,7 @@ public class Appointment {
 //      - This method extracts only the date part from the appointmentTime field.
 //      - It returns a LocalDate object representing just the date (without the time) of the scheduled appointment.
       @Transient
-      private LocalDate getAppointmentDate(){
+      public LocalDate getAppointmentDate(){
              return appointmentTime.toLocalDate();
       }
 // 8. 'getAppointmentTimeOnly' method:
@@ -88,12 +88,13 @@ public class Appointment {
 //      - This method extracts only the time part from the appointmentTime field.
 //      - It returns a LocalTime object representing just the time (without the date) of the scheduled appointment.
       @Transient
-      private LocalTime getAppointmentTimeOnly(){
+      public LocalTime getAppointmentTimeOnly(){
            return appointmentTime.toLocalTime();
       }
 // 9. Constructor(s):
 //    - A no-argument constructor is implicitly provided by JPA for entity creation.
 //    - A parameterized constructor can be added as needed to initialize fields.
+      public Appointment(){}
       public Appointment(Doctor doctor, Patient patient, LocalDateTime appointmentTime, int status){
         this.doctor = doctor;
         this.patient = patient;

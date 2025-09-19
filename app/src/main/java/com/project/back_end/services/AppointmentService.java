@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service;
 
 
 @org.springframework.stereotype.Service 
@@ -72,14 +72,14 @@ public class AppointmentService {
 //    - It should be annotated with `@Transactional` to ensure the operation is executed in a single transaction.
 //    - Instruction: Add `@Transactional` before this method to ensure atomicity when updating appointment status.
     private final AppointmentRepository appointmentRepository;
-    private final Service service;
+    private final com.project.back_end.services.Service service;
     private final TokenService tokenService;
     private final PatientRepository patientRepository;
     private final DoctorRepository doctorRepository;
 
     public AppointmentService(
             AppointmentRepository appointmentRepository,
-            AppService service,
+            com.project.back_end.services.Service service,
             TokenService tokenService,
             PatientRepository patientRepository,
             DoctorRepository doctorRepository
