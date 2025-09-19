@@ -5,13 +5,21 @@ import com.project.back_end.models.Appointment;
 import com.project.back_end.repo.AppointmentRepository;
 import com.project.back_end.repo.DoctorRepository;
 import com.project.back_end.services.TokenService;
+import com.project.back_end.DTO.Login;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class DoctorService {
@@ -203,7 +211,7 @@ public ResponseEntity<Map<String, String>> validateDoctor(Login login) {
     Map<String, String> map = new HashMap<>();
     try {
 
-        Doctor doctor = doctorRepository.findByEmail(login.getEmail());
+        Doctor doctor = doctorRepository.findByEmail(login.getIdentifier());
         if (doctor != null) {
             if (doctor.getPassword().equals(login.getPassword())) {
                 map.put("token", tokenService.generateToken(doctor.getEmail()));

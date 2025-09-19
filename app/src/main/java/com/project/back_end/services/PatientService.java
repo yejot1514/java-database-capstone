@@ -10,9 +10,14 @@ import com.project.back_end.services.TokenService;
 import jakarta.transaction.Transactional;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+//import org.springframework.stereotype.Service;
 
 //import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 //import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -97,15 +102,33 @@ private final PatientRepository patientRepository;
 
     
     @Transactional
-    public List<AppointmentDTO> getPatientAppointment(Long patientId) {
+    public ResponseEntity<Map<String, Object>> getPatientAppointment(Long id, String token) {
+        Map<String, Object> map = new HashMap<>();
         try {
-            List<Appointment> appointments = appointmentRepository.findByPatientId(patientId);
-            return appointments.stream().map(this::convertToDTO).collect(Collectors.toList());
+            List<Appointment> appointments = appointmentRepository.findByPatientId(id);
+            List<AppointmentDTO> appointmentDTOs = appointments.stream()
+                    .map(app -> new AppointmentDTO(
+                            app.getId(),
+                            app.getDoctor().getId(), // Only doctor ID
+                            app.getDoctor().getName(),
+                            app.getPatient().getId(),
+                            app.getPatient().getName(),
+                            app.getPatient().getEmail(),
+                            app.getPatient().getPhone(),
+                            app.getPatient().getAddress(),
+                            app.getAppointmentTime(),
+                            app.getStatus()))
+                    .collect(Collectors.toList());
+
+            map.put("appointments", appointmentDTOs);
+            return ResponseEntity.status(HttpStatus.OK).body(map);
         } catch (Exception e) {
-            e.printStackTrace();
-            return List.of();
+            System.out.println("Error: " + e);
+            map.put("error", "Internal Server Error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
         }
     }
+
 
     
     @Transactional
@@ -134,31 +157,49 @@ private final PatientRepository patientRepository;
     }
 
     
-    @Transactional
-    public List<AppointmentDTO> filterByDoctorAndCondition(String doctorName, Long patientId, String condition) {
-        try {
-            int status = condition.equalsIgnoreCase("past") ? 1 : condition.equalsIgnoreCase("future") ? 0 : -1;
-            if (status == -1) throw new IllegalArgumentException("Invalid condition: must be 'past' or 'future'");
+    public ResponseEntity<Map<String, Object>> filterByDoctorAndCondition(String condition, String name,
+                                                                          long patientId) {
+        Map<String, Object> map = new HashMap<>();
+        List<Appointment> appointments;
+        if (condition.equals("past")) {
+            appointments = appointmentRepository.filterByDoctorNameAndPatientIdAndStatus(name, patientId, 1);
 
-            List<Appointment> list = appointmentRepository.filterByDoctorNameAndPatientIdAndStatus(doctorName, patientId, status);
-            return list.stream().map(this::convertToDTO).collect(Collectors.toList());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return List.of();
+        } else if (condition.equals("future")) {
+            appointments = appointmentRepository.filterByDoctorNameAndPatientIdAndStatus(name, patientId, 0);
+
+        } else {
+            map.put("error", "Invalid filter");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
+
         }
+        List<AppointmentDTO> appointmentDTOs = appointments.stream()
+                .map(app -> new AppointmentDTO(
+                        app.getId(),
+                        app.getDoctor().getId(),
+                        app.getDoctor().getName(),
+                        app.getPatient().getId(),
+                        app.getPatient().getName(),
+                        app.getPatient().getEmail(),
+                        app.getPatient().getPhone(),
+                        app.getPatient().getAddress(),
+                        app.getAppointmentTime(),
+                        app.getStatus()))
+                .collect(Collectors.toList());
+
+        map.put("appointments", appointmentDTOs);
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
+
 
     
-    public Patient getPatientDetails(String token) {
-        try {
-            String email = tokenService.extractEmailFromToken(token);
-            return patientRepository.findByEmail(email);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+     public ResponseEntity<Map<String,Object>> getPatientDetails(String token)
+    {
+        Map<String, Object> map = new HashMap<>();
+        String email=tokenService.extractEmail(token);
+        Patient patient=patientRepository.findByEmail(email);
+        map.put("patient",patient);
+        return ResponseEntity.status(HttpStatus.OK).body(map);
     }
-
     
     private AppointmentDTO convertToDTO(Appointment appointment) {
         Doctor doctor = appointment.getDoctor();

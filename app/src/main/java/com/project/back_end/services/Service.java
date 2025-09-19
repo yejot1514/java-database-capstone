@@ -1,6 +1,7 @@
 package com.project.back_end.services;
 
 import com.project.back_end.DTO.AppointmentDTO;
+import com.project.back_end.DTO.Login; 
 import com.project.back_end.models.Admin;
 import com.project.back_end.models.Doctor;
 import com.project.back_end.models.Patient;
@@ -17,6 +18,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
+import java.util.HashMap;
 
 @org.springframework.stereotype.Service
 public class Service {

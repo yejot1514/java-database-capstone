@@ -1,22 +1,36 @@
 package com.project.back_end.services;
 
+import com.project.back_end.models.Patient;
 import com.project.back_end.models.Appointment;
 
 import com.project.back_end.repo.AppointmentRepository;
 import com.project.back_end.repo.DoctorRepository;
 import com.project.back_end.repo.PatientRepository;
+import com.project.back_end.DTO.AppointmentDTO;
+import com.project.back_end.services.Service;
 
 import jakarta.transaction.Transactional;
 //import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.LocalDateTime;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service 
+import java.util.HashMap;
+//import java.util.List;
+import java.util.Map;
+//import java.util.Optional;
+import java.util.stream.Collectors;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+
+@org.springframework.stereotype.Service 
 public class AppointmentService {
 // 1. **Add @Service Annotation**:
 //    - To indicate that this class is a service layer class for handling business logic.
@@ -58,7 +72,7 @@ public class AppointmentService {
 //    - It should be annotated with `@Transactional` to ensure the operation is executed in a single transaction.
 //    - Instruction: Add `@Transactional` before this method to ensure atomicity when updating appointment status.
     private final AppointmentRepository appointmentRepository;
-    private final AppService service;
+    private final Service service;
     private final TokenService tokenService;
     private final PatientRepository patientRepository;
     private final DoctorRepository doctorRepository;
