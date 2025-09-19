@@ -54,7 +54,7 @@
 import { API_BASE_URL } from "../config/config.js";
 
 // Base endpoint
-const DOCTOR_API = `${API_BASE_URL}/api/doctors`;
+const DOCTOR_API = `${API_BASE_URL}/doctor`;
 
 // === Get All Doctors ===
 export async function getDoctors() {
@@ -68,67 +68,61 @@ export async function getDoctors() {
   }
 }
 
-// === Delete Doctor by ID (Admin) ===
 export async function deleteDoctor(doctorId, token) {
   try {
-    const response = await fetch(`${DOCTOR_API}/delete/${doctorId}/${token}`, {
-      method: "DELETE"
+    const response = await fetch(`${DOCTOR_API}/${doctorId}/${token}`, {
+      method: 'DELETE',
     });
-
     const data = await response.json();
     return {
       success: response.ok,
-      message: data.message
+      message: data.message || 'Unknown response from server',
     };
   } catch (error) {
-    console.error("Error deleting doctor:", error);
+    console.error('Error deleting doctor:', error);
     return {
       success: false,
-      message: "An unexpected error occurred."
+      message: 'Failed to delete doctor due to a network or server error.',
     };
   }
 }
 
-// === Save New Doctor ===
+// Save a new doctor with token
 export async function saveDoctor(doctor, token) {
   try {
-    const response = await fetch(`${DOCTOR_API}/create/${token}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(doctor)
+    const response = await fetch(`${DOCTOR_API}/${token}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(doctor),
     });
-
     const data = await response.json();
     return {
       success: response.ok,
-      message: data.message
+      message: data.message || 'Doctor saved successfully.',
     };
   } catch (error) {
-    console.error("Error saving doctor:", error);
+    console.error('Error saving doctor:', error);
     return {
       success: false,
-      message: "Unable to save doctor. Please try again."
+      message: 'Failed to save doctor due to a network or server error.',
     };
   }
 }
 
-// === Filter Doctors by Name, Time, and Specialty ===
-export async function filterDoctors(name = "", time = "", specialty = "") {
+// Filter doctors by name, time, and specialty
+export async function filterDoctors(name, time, specialty) {
   try {
     const response = await fetch(`${DOCTOR_API}/filter/${name}/${time}/${specialty}`);
-
-    if (!response.ok) {
-      console.error("Filter request failed");
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      console.error('Failed to filter doctors:', response.statusText);
       return { doctors: [] };
     }
-
-    const data = await response.json();
-    return data.doctors || [];
   } catch (error) {
-    console.error("Error filtering doctors:", error);
-    alert("Something went wrong while filtering doctors.");
+    console.error('Error filtering doctors:', error);
+    alert('An error occurred while filtering doctors. Please try again later.');
     return { doctors: [] };
   }
 }
