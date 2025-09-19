@@ -66,19 +66,19 @@ const DOCTOR_API = API_BASE_URL + '/doctor/login'
 
 window.onload = function() {
   //alert("jascript started");
-  const adminLoginBtn = document.getElementById("adminLoginBtn");
-  const doctorLoginBtn = document.getElementById('doctorLoginBtn');
+  const adminBtn = document.getElementById("adminLoginBtn");
+  const doctorBtn = document.getElementById('doctorLoginBtn');
 
-  if (adminLoginBtn) {
+  if (adminBtn) {
     //alert("admin button clicked");
     adminLoginBtn.addEventListener('click', () => openModal('adminLogin'));
   }
 
-  if (doctorLoginBtn) {
-    doctorLoginBtn.addEventListener('click', () => openModal('doctorLogin'));
+  if (doctorBtn) {
+    doctorBtn.addEventListener('click', () => openModal('doctorLogin'));
   }
 };
-// === Admin Login Handler ===
+//
 window.adminLoginHandler = async function () {
     const username = document.getElementById("adminUsername").value;
     alert("you entered " + username);
@@ -102,7 +102,7 @@ window.adminLoginHandler = async function () {
       });
   
       if (!response.ok) {
-        alert("Invalid admin credentials.");
+        alert("Invalid credentials!");
         return;
       }
   
@@ -116,10 +116,10 @@ window.adminLoginHandler = async function () {
       alert("An error occurred. Please try again later.");
     }
   };
-  // === Doctor Login Handler ===
+  //
 window.doctorLoginHandler = async function () {
-    const email = document.getElementById("doctorEmail")?.value;
-    const password = document.getElementById("doctorPassword")?.value;
+    const email = document.getElementById("doctorEmail").value;
+    const password = document.getElementById("doctorPassword").value;
   
     if (!email || !password) {
       alert("Please enter both email and password.");
@@ -137,7 +137,7 @@ window.doctorLoginHandler = async function () {
         body: JSON.stringify(doctor)
       });
       if (!response.ok) {
-        alert("Invalid doctor credentials.");
+        alert("Invalid credentials!");
         return;
       }
   

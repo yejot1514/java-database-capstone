@@ -56,7 +56,7 @@ import { API_BASE_URL } from "../config/config.js";
 // Base endpoint
 const DOCTOR_API = `${API_BASE_URL}/doctor`;
 
-// === Get All Doctors ===
+// 
 export async function getDoctors() {
   try {
     const response = await fetch(DOCTOR_API);
@@ -76,13 +76,13 @@ export async function deleteDoctor(doctorId, token) {
     const data = await response.json();
     return {
       success: response.ok,
-      message: data.message || 'Unknown response from server',
+      message: data.message 
     };
   } catch (error) {
     console.error('Error deleting doctor:', error);
     return {
       success: false,
-      message: 'Failed to delete doctor due to a network or server error.',
+      message: "Failed to delete doctor."
     };
   }
 }
@@ -98,13 +98,13 @@ export async function saveDoctor(doctor, token) {
     const data = await response.json();
     return {
       success: response.ok,
-      message: data.message || 'Doctor saved successfully.',
+      message: data.message 
     };
   } catch (error) {
     console.error('Error saving doctor:', error);
     return {
       success: false,
-      message: 'Failed to save doctor due to a network or server error.',
+      message: "Unable to save doctor. please try again."
     };
   }
 }

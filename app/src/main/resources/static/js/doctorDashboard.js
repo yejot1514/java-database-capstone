@@ -53,15 +53,15 @@
     - Call loadAppointments() to display today's appointments by default
 */
 import { getAllAppointments } from "./services/appointmentRecordService.js";
-import { createPatientRow } from "./components/patientRecordRow.js";
+import { createPatientRow } from "./components/patientdRow.js";
 
-// === State Variables ===
+
 const tableBody = document.getElementById("patientTableBody");
 const token = localStorage.getItem("token");
 let selectedDate = new Date().toISOString().split("T")[0]; // today's date in YYYY-MM-DD
 let patientName = null;
 
-// === Search Bar Filtering ===
+
 const searchBar = document.getElementById("searchBar");
 if (searchBar) {
   searchBar.addEventListener("input", () => {
@@ -71,7 +71,7 @@ if (searchBar) {
   });
 }
 
-// === "Today" Button Handler ===
+
 const todayButton = document.getElementById("todayButton");
 if (todayButton) {
   todayButton.addEventListener("click", () => {
@@ -81,7 +81,7 @@ if (todayButton) {
   });
 }
 
-// === Date Picker Change Handler ===
+
 const datePicker = document.getElementById("datePicker");
 if (datePicker) {
   datePicker.addEventListener("change", () => {
@@ -90,14 +90,13 @@ if (datePicker) {
   });
 }
 
-// === Load Appointments Based on Date & Optional Name Filter ===
 async function loadAppointments() {
   try {
     const appointments = await getAllAppointments(selectedDate, patientName, token);
     tableBody.innerHTML = "";
 
     if (!appointments || appointments.length === 0) {
-      tableBody.innerHTML = `<tr><td colspan="5" class="noPatientRecord">No Appointments found for selected date.</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="5" class="noPatientRecord">No Appointments found for today.</td></tr>`;
       return;
     }
 
@@ -113,14 +112,14 @@ async function loadAppointments() {
     });
   } catch (err) {
     console.error("Error loading appointments:", err);
-    tableBody.innerHTML = `<tr><td colspan="5" class="noPatientRecord">Error loading appointments. Try again later.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="5" class="noPatientRecord">Error loading appointments. Pleaset ry again later.</td></tr>`;
   }
 }
 
-// === Initialize Page on Load ===
+
 document.addEventListener("DOMContentLoaded", () => {
-  renderContent(); // Injects header/footer layout
-  loadAppointments(); // Loads today's appointments
+  renderContent(); 
+  loadAppointments(); 
 });
 
 

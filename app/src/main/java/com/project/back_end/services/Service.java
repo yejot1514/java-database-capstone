@@ -182,7 +182,7 @@ public final TokenService tokenService;
     }
 
     
-    @SuppressWarnings("unlikely-arg-type")
+    //@SuppressWarnings("unlikely-arg-type")
     public int validateAppointment(Long doctorId, LocalDate date, LocalTime time) {
         Optional<Doctor> optional = doctorRepository.findById(doctorId);
         if (optional.isEmpty()) return -1;
