@@ -88,7 +88,6 @@ public final TokenService tokenService;
     private final PatientService patientService;
 
     
-    //@Autowired
     public Service(TokenService tokenService,
                    AdminRepository adminRepository,
                    DoctorRepository doctorRepository,

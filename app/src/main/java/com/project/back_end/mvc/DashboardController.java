@@ -34,7 +34,7 @@ public class DashboardController {
 //    - Validates the token using the shared service for the `"doctor"` role.
 //    - If the token is valid, forwards the user to the `"doctor/doctorDashboard"` view.
 //    - If the token is invalid, redirects to the root URL.
-@Autowired
+    @Autowired
     Service service;
 
     @GetMapping("/adminDashboard/{token}")

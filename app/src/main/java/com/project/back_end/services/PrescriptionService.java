@@ -44,60 +44,47 @@ public class PrescriptionService {
 
  private final PrescriptionRepository prescriptionRepository;
 
-    // 2. Constructor Injection
-    //@Autowired
+
     public PrescriptionService(PrescriptionRepository prescriptionRepository) {
         this.prescriptionRepository = prescriptionRepository;
     }
 
     // 3. Save a new prescription
-    public ResponseEntity<?> savePrescription(Prescription prescription) {
-        try {
-            List<Prescription> existing = prescriptionRepository.findByAppointmentId(prescription.getAppointmentId());
-
-            if (!existing.isEmpty()) {
-                Map<String, Object> response = new HashMap<>();
-                response.put("message", "Prescription already exists for this appointment.");
-                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Map<String, String>> savePrescription(Prescription prescription)
+    {
+        Map<String, String> map=new HashMap<>();
+        try{
+            List<Prescription> result=prescriptionRepository.findByAppointmentId(prescription.getAppointmentId());
+            if(result.isEmpty())
+            {
+                prescriptionRepository.save(prescription);
+                map.put("message","Prescription saved");
+                return ResponseEntity.status(HttpStatus.CREATED).body(map);
             }
+            map.put("message", "Prescription already exists.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
 
-            prescriptionRepository.save(prescription);
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", "Prescription saved successfully.");
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Map<String, Object> error = new HashMap<>();
-            error.put("error", "Failed to save prescription.");
-            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        catch(Exception e)
+        {
+            map.put("message","Internal Server Error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
         }
     }
 
     // 4. Retrieve prescription by appointment ID
-    public ResponseEntity<?> getPrescription(Long appointmentId) {
-        try {
-            List<Prescription> prescriptions = prescriptionRepository.findByAppointmentId(appointmentId);
-
-            if (prescriptions.isEmpty()) {
-                Map<String, Object> response = new HashMap<>();
-                response.put("message", "No prescription found for this appointment.");
-                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-            }
-
-            // Assuming only one prescription per appointment is allowed
-            Prescription prescription = prescriptions.get(0);
-            Map<String, Object> response = new HashMap<>();
-            response.put("prescription", prescription);
-
-            return new ResponseEntity<>(response, HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Map<String, Object> error = new HashMap<>();
-            error.put("error", "Error retrieving prescription.");
-            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<Map<String, Object>> getPrescription(Long appointmentId)
+    {
+        Map<String, Object> map=new HashMap<>();
+        try{
+            map.put("prescription",prescriptionRepository.findByAppointmentId(appointmentId));
+            return ResponseEntity.status(HttpStatus.OK).body(map);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error: "+e);
+            map.put("error","Internal Server Error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
         }
     }
 }
