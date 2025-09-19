@@ -7,8 +7,8 @@ import com.project.back_end.services.Service;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController // 
-@RequestMapping("${api.path}admin")
+@RestController 
+@RequestMapping("${api.path}" + "admin")
 public class AdminController {
 
 // 1. Set Up the Controller Class:
@@ -32,16 +32,20 @@ public class AdminController {
 private final Service service;
 
     
-    //@Autowired
+    @Autowired
     public AdminController(Service service) {
         this.service = service;
     }
 
-    
-    @PostMapping("/login")
-    public ResponseEntity<?> adminLogin(@RequestBody Admin admin) {
-        return service.validateAdmin(admin.getUsername(), admin.getPassword());
+     @PostMapping
+    public ResponseEntity<Map<String, String>> adminLogin(@RequestBody Admin admin)
+    {
+        return service.validateAdmin(admin);
     }
+    //@PostMapping("/login")
+    //public ResponseEntity<?> adminLogin(@RequestBody Admin admin) {
+    //    return service.validateAdmin(admin.getUsername(), admin.getPassword());
+    //}
 
 }
 

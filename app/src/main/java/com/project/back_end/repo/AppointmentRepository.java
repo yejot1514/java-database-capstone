@@ -73,38 +73,55 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 // 4. @Repository annotation:
 //    - The @Repository annotation marks this interface as a Spring Data JPA repository.
 //    - Spring Data JPA automatically implements this repository, providing the necessary CRUD functionality and custom queries defined in the interface.
-     List<Appointment> findByDoctorIdAndAppointmentTimeBetween(Long doctorId, LocalDateTime start, LocalDateTime end);
+@Query(
+    "SELECT a FROM Appointment a LEFT JOIN FETCH a.doctor d LEFT JOIN FETCH d.availableTimes WHERE a.doctor.id = :doctorId AND a.appointmentTime BETWEEN :start AND :end"
+)
+List<Appointment> findByDoctorIdAndAppointmentTimeBetween(
+    Long doctorId,
+    LocalDateTime start,
+    LocalDateTime end
+);
 
-    // 2. Find appointments by doctor, patient name (case-insensitive), and time range
-    List<Appointment> findByDoctorIdAndPatient_NameContainingIgnoreCaseAndAppointmentTimeBetween(
-            Long doctorId,
-            String patientName,
-            LocalDateTime start,
-            LocalDateTime end
-    );
+@Query(
+    "SELECT a FROM Appointment a LEFT JOIN FETCH a.doctor d LEFT JOIN FETCH d.availableTimes LEFT JOIN FETCH a.patient p WHERE a.doctor.id = :doctorId AND p.name LIKE %:patientName% AND a.appointmentTime BETWEEN :start AND :end"
+)
+List<Appointment> findByDoctorIdAndPatient_NameContainingIgnoreCaseAndAppointmentTimeBetween(
+    Long doctorId,
+    String patientName,
+    LocalDateTime start,
+    LocalDateTime end
+);
 
-    // 3. Delete all appointments by doctor ID
-    @Modifying
-    @Transactional
-    void deleteAllByDoctorId(Long doctorId);
+@Modifying
+@Transactional
+@Query("DELETE FROM Appointment a WHERE a.doctor.id = :doctorId")
+void deleteAllByDoctorId(Long doctorId);
 
-    // 4. Get all appointments for a patient
-    List<Appointment> findByPatientId(Long patientId);
+List<Appointment> findByPatientId(Long patientId);
 
-    // 5. Get appointments for patient with specific status, ordered by time
-    List<Appointment> findByPatient_IdAndStatusOrderByAppointmentTimeAsc(Long patientId, int status);
+List<Appointment> findByPatient_IdAndStatusOrderByAppointmentTimeAsc(
+    Long patientId,
+    int status
+);
 
-    // 6. Filter appointments by doctor name and patient ID (LIKE doctor name)
-    @Query("SELECT a FROM Appointment a WHERE LOWER(a.doctor.name) LIKE LOWER(CONCAT('%', :doctorName, '%')) AND a.patient.id = :patientId")
-    List<Appointment> filterByDoctorNameAndPatientId(String doctorName, Long patientId);
+@Query(
+    "SELECT a FROM Appointment a WHERE LOWER(a.doctor.name) LIKE LOWER(CONCAT('%', :doctorName, '%')) AND a.patient.id = :patientId"
+)
+List<Appointment> filterByDoctorNameAndPatientId(
+    String doctorName,
+    Long patientId
+);
 
-    // 7. Filter appointments by doctor name, patient ID, and status
-    @Query("SELECT a FROM Appointment a WHERE LOWER(a.doctor.name) LIKE LOWER(CONCAT('%', :doctorName, '%')) AND a.patient.id = :patientId AND a.status = :status")
-    List<Appointment> filterByDoctorNameAndPatientIdAndStatus(String doctorName, Long patientId, int status);
+@Query(
+    "SELECT a FROM Appointment a WHERE LOWER(a.doctor.name) LIKE LOWER(CONCAT('%', :doctorName, '%')) AND a.patient.id = :patientId AND a.status = :status"
+)
+List<Appointment> filterByDoctorNameAndPatientIdAndStatus(
+    String doctorName,
+    Long patientId,
+    int status
+);
 
-    // 8. Update status of an appointment
-    @Modifying
-    @Transactional
-    @Query("UPDATE Appointment a SET a.status = :status WHERE a.id = :id")
-    void updateStatus(int status, long id);
+@Modifying
+@Query("UPDATE Appointment a SET a.status = :status WHERE a.id = :id")
+void updateStatus(int status, long id);
 }

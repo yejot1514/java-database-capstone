@@ -65,12 +65,12 @@ const ADMIN_API = API_BASE_URL + '/admin/login';
 const DOCTOR_API = API_BASE_URL + '/doctor/login'
 
 window.onload = function() {
-  alert("jascript started");
+  //alert("jascript started");
   const adminLoginBtn = document.getElementById("adminLoginBtn");
   const doctorLoginBtn = document.getElementById('doctorLoginBtn');
 
   if (adminLoginBtn) {
-    alert("admin button clicked");
+    //alert("admin button clicked");
     adminLoginBtn.addEventListener('click', () => openModal('adminLogin'));
   }
 
@@ -80,8 +80,9 @@ window.onload = function() {
 };
 // === Admin Login Handler ===
 window.adminLoginHandler = async function () {
-    const username = document.getElementById("adminUsername")?.value;
-    const password = document.getElementById("adminPassword")?.value;
+    const username = document.getElementById("adminUsername").value;
+    alert("you entered " + username);
+    const password = document.getElementById("adminPassword").value;
   
     if (!username || !password) {
       alert("Please enter both username and password.");
@@ -89,8 +90,9 @@ window.adminLoginHandler = async function () {
     }
   
     const admin = { username, password };
-  
+    alert("your password is " + password);
     try {
+        alert(ADMIN_API);
       const response = await fetch(ADMIN_API, {
         method: "POST",
         headers: {

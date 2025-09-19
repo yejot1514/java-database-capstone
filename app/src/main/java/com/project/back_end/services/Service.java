@@ -104,50 +104,81 @@ public final TokenService tokenService;
     }
 
     
-    public boolean validateToken(String token, String role) {
-        try {
-            return tokenService.validateToken(token, role);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+    //public boolean validateToken(String token, String role) {
+    //    try {
+    //        return tokenService.validateToken(token, role);
+    //    } catch (Exception e) {
+    //        e.printStackTrace();
+    //        return false;
+     //   }
+    //}
+    public ResponseEntity<Map<String, String>> validateToken(String token, String user) {
+        Map<String, String> response = new HashMap<>();
+        if (!tokenService.validateToken(token, user)) {
+            response.put("error", "Invalid or expired token");
         }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 
    
-    public ResponseEntity<?> validateAdmin(String username, String password) {
+    //public ResponseEntity<?> validateAdmin(String username, String password) {
+    //    try {
+    //        Admin admin = adminRepository.findByUsername(username);
+    //        if (admin == null || !admin.getPassword().equals(password)) {
+    //            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+    //                    .body("Invalid username or password.");
+    //        }
+    //        String token = tokenService.generateToken(null, "admin", username);
+    //        return ResponseEntity.ok(token);
+    //    } catch (Exception e) {
+    //        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    //                .body("Login failed due to an internal error.");
+    //    }
+    //}
+    public ResponseEntity<Map<String, String>> validateAdmin(Admin receivedAdmin) {
+        Map<String, String> map = new HashMap<>();
         try {
-            Admin admin = adminRepository.findByUsername(username);
-            if (admin == null || !admin.getPassword().equals(password)) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body("Invalid username or password.");
+            Admin admin = adminRepository.findByUsername(receivedAdmin.getUsername());
+            if (admin != null) {
+                if (admin.getPassword().equals(receivedAdmin.getPassword())) {
+                    map.put("token", tokenService.generateToken(admin.getUsername()));
+                    return ResponseEntity.status(HttpStatus.OK).body(map);
+                } else {
+                    map.put("error", "Password does not match");
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
+                }
             }
-            String token = tokenService.generateToken(null, "admin", username);
-            return ResponseEntity.ok(token);
+            map.put("error", "invalid email id");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
+
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Login failed due to an internal error.");
+            System.out.println("Error: " + e);
+            map.put("error", "Internal Server error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
         }
     }
-
     
-    public List<Doctor> filterDoctor(String name, String specialty, String time) {
-        if (name != null && specialty != null && time != null) {
-            return doctorService.filterDoctorsByNameSpecialtyAndTime(name, specialty, time);
-        } else if (name != null && specialty != null) {
-            return doctorService.filterDoctorByNameAndSpecialty(name, specialty);
-        } else if (name != null && time != null) {
-            return doctorService.filterDoctorByNameAndTime(name, time);
-        } else if (specialty != null && time != null) {
-            return doctorService.filterDoctorByTimeAndSpecialty(specialty, time);
-        } else if (name != null) {
-            return doctorService.findDoctorByName(name);
-        } else if (specialty != null) {
-            return doctorService.filterDoctorBySpecialty(specialty);
-        } else if (time != null) {
-            return doctorService.filterDoctorsByTime(time);
+    public Map<String, Object> filterDoctor(String name, String specility, String time) {
+        Map<String, Object> map = new HashMap<>();
+        if (!name.equals("null") && !time.equals("null") && !specility.equals("null")) {
+            map = doctorService.filterDoctorsByNameSpecilityandTime(name, specility, time);
+        } else if (!name.equals("null") && !time.equals("null")) {
+            map = doctorService.filterDoctorByNameAndTime(name, time);
+        } else if (!name.equals("null") && !specility.equals("null")) {
+            map = doctorService.filterDoctorByNameAndSpecility(name, specility);
+        } else if (!specility.equals("null") && !time.equals("null")) {
+            map = doctorService.filterDoctorByTimeAndSpecility(specility, time);
+        } else if (!name.equals("null")) {
+            map = doctorService.findDoctorByName(name);
+        } else if (!specility.equals("null")) {
+            map = doctorService.filterDoctorBySpecility(specility);
+        } else if (!time.equals("null")) {
+            map = doctorService.filterDoctorsByTime(time);
         } else {
-            return doctorService.getDoctors();
+            map.put("doctors", doctorService.getDoctors());
         }
+        return map;
+
     }
 
     
@@ -166,44 +197,41 @@ public final TokenService tokenService;
     }
 
     
-    public ResponseEntity<?> validatePatientLogin(String email, String password) {
+    public ResponseEntity<Map<String, String>> validatePatientLogin(Login login) {
+        Map<String, String> map = new HashMap<>();
         try {
-            Patient patient = patientRepository.findByEmail(email);
-            if (patient == null || !patient.getPassword().equals(password)) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body("Invalid email or password.");
+            Patient result = patientRepository.findByEmail(login.getEmail());
+            if (result != null) {
+                if (result.getPassword().equals(login.getPassword())) {
+                    map.put("token", tokenService.generateToken(login.getEmail()));
+                    return ResponseEntity.status(HttpStatus.OK).body(map);
+                } else {
+                    map.put("error", "Password does not match");
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
+                }
             }
-            String token = tokenService.generateToken(patient.getId(), "patient", email);
-            return ResponseEntity.ok(token);
+            map.put("error", "invalid email id");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Login failed due to an internal error.");
+            System.out.println("Error: " + e);
+            map.put("error", "Internal Server error");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
         }
     }
 
     
-    public List<AppointmentDTO> filterPatient(String token, String condition, String doctorName) {
-        try {
-            String email = tokenService.extractEmailFromToken(token);
-            Patient patient = patientRepository.findByEmail(email);
+    public ResponseEntity<Map<String, Object>> filterPatient(String condition, String name, String token) {
+        String extractedEmail = tokenService.extractEmail(token);
+        Long patientId = patientRepository.findByEmail(extractedEmail).getId();
 
-            if (patient == null) return List.of();
-
-            Long patientId = patient.getId();
-
-            if (condition != null && doctorName != null) {
-                return patientService.filterByDoctorAndCondition(doctorName, patientId, condition);
-            } else if (doctorName != null) {
-                return patientService.filterByDoctor(doctorName, patientId);
-            } else if (condition != null) {
-                return patientService.filterByCondition(patientId, condition);
-            } else {
-                return patientService.getPatientAppointment(patientId);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return List.of();
+        if (name.equals("null") && !condition.equals("null")) {
+            return patientService.filterByCondition(condition, patientId);
+        } else if (condition.equals("null") && !name.equals("null")) {
+            return patientService.filterByDoctor(name, patientId);
+        } else if (!condition.equals("null") && !name.equals("null")) {
+            return patientService.filterByDoctorAndCondition(condition, name, patientId);
+        } else {
+            return patientService.getPatientAppointment(patientId, token);
         }
     }
 
