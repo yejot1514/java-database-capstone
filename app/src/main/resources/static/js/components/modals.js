@@ -40,9 +40,9 @@ export function openModal(type) {
   } else if (type === 'patientLogin') {
     modalContent = `
         <h2>Patient Login</h2>
-        <input type="text" id="email" placeholder="Email" class="input-field">
-        <input type="password" id="password" placeholder="Password" class="input-field">
-        <button class="dashboard-btn" id="loginBtn">Login</button>
+        <input type="text" id="patientEmail" placeholder="Email" class="input-field">
+        <input type="password" id="patientPassword" placeholder="Password" class="input-field">
+        <button class="dashboard-btn" id="patientLoginBtn">Login</button>
       `;
   }
   else if (type === "patientSignup") {
@@ -85,7 +85,8 @@ export function openModal(type) {
   }
 
   if (type === "patientLogin") {
-    document.getElementById("loginBtn").addEventListener("click", loginPatient);
+    //document.getElementById("patientLoginBtn").addEventListener("click", loginPatient);
+    document.getElementById("patientLoginBtn").addEventListener("click", patientLoginHandler);
   }
 
   if (type === 'addDoctor') {
