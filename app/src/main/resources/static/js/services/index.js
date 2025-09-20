@@ -63,6 +63,7 @@ import { API_BASE_URL } from '../config/config.js';
 const ADMIN_API = API_BASE_URL + '/admin/login';
 //const DOCTOR_API = `${BASE_API_URL}/doctor/login`;
 const DOCTOR_API = API_BASE_URL + '/doctor/login';
+const PATIENT_API = API_BASE_URL + '/patient/login';
 
 window.onload = function() {
   //alert("jascript started");
@@ -152,4 +153,39 @@ window.doctorLoginHandler = async function () {
       alert("An error occurred. Please try again later.");
     }
   };
-    
+
+
+window.patientLoginHandler = async function () {
+    const identifier = document.getElementById("patientEmail").value;
+    const password = document.getElementById("patientPassword").value;
+  
+    if (!identifier || !password) {
+      alert("Please enter both email and password.");
+      return;
+    }
+  
+    const patient = { identifier, password };
+  
+    try {
+      const response = await fetch(PATIENT_API, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(patient)
+      });
+      if (!response.ok) {
+        alert("Invalid patient credentials!");
+        return;
+      }
+  
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userRole", "doctor");
+  
+      selectRole("patient");
+    } catch (error) {
+      console.error("Patient login failed:", error);
+      alert("An error occurred. Please try again later.");
+    }
+  };
