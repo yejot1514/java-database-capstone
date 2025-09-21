@@ -63,12 +63,14 @@ import { API_BASE_URL } from '../config/config.js';
 const ADMIN_API = API_BASE_URL + '/admin/login';
 //const DOCTOR_API = `${BASE_API_URL}/doctor/login`;
 const DOCTOR_API = API_BASE_URL + '/doctor/login';
-const PATIENT_API = API_BASE_URL + '/patient/login';
+const PATIENT_API = API_BASE_URL + '/patient';
 
 window.onload = function() {
   //alert("jascript started");
   const adminBtn = document.getElementById("adminLoginBtn");
   const doctorBtn = document.getElementById('doctorLoginBtn');
+  const patientBtn = document.getElementById('patientLoginBtn');
+  
 
   if (adminBtn) {
     //alert("admin button clicked");
@@ -77,6 +79,15 @@ window.onload = function() {
 
   if (doctorBtn) {
     doctorBtn.addEventListener('click', () => openModal('doctorLogin'));
+  }
+  if (patientBtn){
+    patientBtn.addEventListener('click', () => openModal('patientLogin'));
+  }
+  
+  const patientSignUpBtn = document.getElementById('patientSignUpBtn');
+
+  if (patientSignUpBtn){
+    patientBtn.addEventListener('click', () => openModal('patientSignUp2'));
   }
 };
 //
@@ -167,7 +178,7 @@ window.patientLoginHandler = async function () {
     const patient = { identifier, password };
   
     try {
-      const response = await fetch(PATIENT_API, {
+      const response = await fetch(`{PATIENT_API}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -181,11 +192,51 @@ window.patientLoginHandler = async function () {
   
       const data = await response.json();
       localStorage.setItem("token", data.token);
-      localStorage.setItem("userRole", "doctor");
+      localStorage.setItem("userRole", "patient");
   
-      selectRole("patient");
+      selectRole("loggedPatient");
     } catch (error) {
       console.error("Patient login failed:", error);
       alert("An error occurred. Please try again later.");
     }
   };
+
+window.signupPatient = async function() {
+    const name = document.getElementById("patientName").value;
+    const identifier = document.getElementById("patientEmail").value;
+    const password = document.getElementById("patientPassword").value;
+    const phone = document.getElementById("patientEmail").value;
+    const address = document.getElementById("patientPassword").value;
+    
+    if (!identifier || !password) {
+        alert("Please enter both email and password.");
+        return;
+    }
+
+    const newPatient = { identifier, password };
+
+    try {
+        const response = await fetch(PATIENT_API, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(newPatient)
+        });
+        if (!response.CREATED) {
+          alert(" patient credentials exists!");
+          return;
+        }
+        //openModal('patientLogin');
+        //const data = await response.json();
+        //localStorage.setItem("token", data.token);
+        localStorage.setItem("userRole", "patient");
+  
+        selectRole("patient");
+    } catch (error) {
+      console.error("Patient signup failed:", error);
+      alert("An error occurred. Please try again later.");
+    }
+    
+
+};

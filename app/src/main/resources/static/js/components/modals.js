@@ -43,6 +43,8 @@ export function openModal(type) {
         <input type="text" id="patientEmail" placeholder="Email" class="input-field">
         <input type="password" id="patientPassword" placeholder="Password" class="input-field">
         <button class="dashboard-btn" id="patientLoginBtn">Login</button>
+        New patient? 
+        <button class="dashboard-btn" id="patientSignUpBtn>SignUp</button>
       `;
   }
   else if (type === "patientSignup") {
@@ -72,6 +74,19 @@ export function openModal(type) {
         <button class="dashboard-btn" id="doctorLoginBtn2" >Login</button>
       `;
   }
+  
+  if (type === "patientSignUp2"){
+    modalContent = `
+    <h2>Patient Signup</h2>
+    <input type="text" id="patientName" placeholder="Name" class="input-field">
+    <input type="email" id="patientEmail" placeholder="Email" class="input-field">
+    <input type="password" id="patientPassword" placeholder="Password" class="input-field">
+    <input type="text" id="patientPhone" placeholder="Phone" class="input-field">
+    <input type="text" id="patientAddress" placeholder="Address" class="input-field">
+    <button class="dashboard-btn" id="signupBtn">Signup</button>
+  `;
+  
+  }
 
   document.getElementById('modal-body').innerHTML = modalContent;
   document.getElementById('modal').style.display ="block";
@@ -87,8 +102,8 @@ export function openModal(type) {
   if (type === "patientLogin") {
     //document.getElementById("patientLoginBtn").addEventListener("click", loginPatient);
     document.getElementById("patientLoginBtn").addEventListener("click", patientLoginHandler);
+    //document.getElementById("patientSignUpBtn").addEventListener("click", );
   }
-
   if (type === 'addDoctor') {
     document.getElementById('saveDoctorBtn').addEventListener('click', adminAddDoctor);
   }
@@ -99,5 +114,9 @@ export function openModal(type) {
 
   if (type === 'doctorLogin') {
     document.getElementById('doctorLoginBtn2').addEventListener('click', doctorLoginHandler);
+  }
+  
+  if (type === "patientSignup2") {
+    document.getElementById("signupBtn").addEventListener("click", signupPatient);
   }
 }

@@ -12,10 +12,11 @@ function selectRole(role) {
   } else if (role === "doctor") {
     if (token) {
       window.location.href = `/doctorDashboard/${token}`;
-    } else if (role === "loggedPatient") {
-      window.location.href = "loggedPatientDashboard.html";
     }
-  }
+    } else if (role === "loggedPatient") {
+      window.location.href = "/pages/loggedPatientDashboard.html";
+    }
+  
 }
 
 
