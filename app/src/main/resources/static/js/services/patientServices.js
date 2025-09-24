@@ -16,7 +16,8 @@ export async function patientSignup(data) {
       }
     );
     const result = await response.json();
-    if (!response.ok) {
+    if (!response.ok) { 
+        window.alert("response json not ok");
       throw new Error(result.message);
     }
     return { success: response.ok, message: result.message }

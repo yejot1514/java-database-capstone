@@ -75,12 +75,12 @@ export function openModal(type) {
       `;
   }
   
-  if (type === "patientSignup2"){ window.alert("i am tiered");
+  if (type === "patientSignup2"){ window.alert("i am tired");
     modalContent = `
     <h2>Patient Signup</h2>
-    <input type="text" id="patientName" placeholder="Name" class="input-field">
-    <input type="email" id="patientEmail" placeholder="Email" class="input-field">
-    <input type="password" id="patientPassword" placeholder="Password" class="input-field">
+    <input type="text" id="patientNames" placeholder="Name" class="input-field">
+    <input type="email" id="patientEmails" placeholder="Email" class="input-field">
+    <input type="password" id="patientPasswords" placeholder="Password" class="input-field">
     <input type="text" id="patientPhone" placeholder="Phone" class="input-field">
     <input type="text" id="patientAddress" placeholder="Address" class="input-field">
     <button class="dashboard-btn" id="signupBtn">Signup</button>
@@ -100,9 +100,10 @@ export function openModal(type) {
   }
 
   if (type === "patientLogin") {
+    alert("what happened?");
     //document.getElementById("patientLoginBtn").addEventListener("click", loginPatient);
     document.getElementById("patientLoginBtn").addEventListener("click", patientLoginHandler);
-    document.getElementById("patientSignUpBtn").addEventListener("click", dan);
+    //document.getElementById("patientSignUpBtn").addEventListener("click", dan);
   }
   if (type === 'addDoctor') {
     document.getElementById('saveDoctorBtn').addEventListener('click', adminAddDoctor);
@@ -117,6 +118,6 @@ export function openModal(type) {
   }
   
   if (type === "patientSignup2") {
-    document.getElementById("ssiguupBtn").addEventListener("click", signupPatient);
+    document.getElementById("signupBtn").addEventListener("click", patientSignupHandler);
  }
 }
