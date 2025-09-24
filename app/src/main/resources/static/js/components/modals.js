@@ -117,6 +117,6 @@ export function openModal(type) {
   }
   
   if (type === "patientSignup2") {
-    document.getElementById("patientSsigUupBtn").addEventListener("click", signupPatient);
+    document.getElementById("ssiguupBtn").addEventListener("click", signupPatient);
  }
 }

@@ -58,6 +58,9 @@
 */
 import { openModal } from '../components/modals.js';
 import { API_BASE_URL } from '../config/config.js';
+import { createDoctorCard } from '../components/doctorCard.js';
+import { filterDoctors } from '../services/doctorServices.js';//call the same function to avoid duplication coz the functionality was same
+import { patientSignup, patientLogin } from '../services/patientServices.js';
 
 //const ADMIN_API = `${BASE_API_URL}/admin/login`;
 const ADMIN_API = API_BASE_URL + '/admin/login';
@@ -204,7 +207,7 @@ window.patientLoginHandler = async function () {
     }
   };
 
-window.signupPatient = async function() {
+window.patientSignupHandler = async function() {
     const name = document.getElementById("patientName").value;
     const identifier = document.getElementById("patientEmail").value;
     const password = document.getElementById("patientPassword").value;
