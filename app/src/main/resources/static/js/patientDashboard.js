@@ -6,11 +6,17 @@ import { filterDoctors } from './services/doctorServices.js';//call the same fun
 import { patientSignup, patientLogin } from './services/patientServices.js';
 
 
-
-document.addEventListener("DOMContentLoaded", () => {
+window.onload = function() {
+    alert("patient jascript started");
+}
+document.getElementById("patientLogin").addEventListener("click", dan);
+document.addEventListener("DOMContentLoaded", () => { window.alert("in patientdashjs");
   loadDoctorCards();
 });
-
+function dan(){
+    window.alert("in dan patientdashjs");
+}
+dan();
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("patientSignup");
   if (btn) {
@@ -19,11 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const loginBtn = document.getElementById("patientLogin")
+  const loginBtn = document.getElementById("patientLogin");
   if (loginBtn) {
     loginBtn.addEventListener("click", () => {
-      openModal("patientLogin")
-    })
+      openModal("patientLogin");
+    });
   }
 })
 

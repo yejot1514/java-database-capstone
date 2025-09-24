@@ -87,9 +87,12 @@ window.onload = function() {
   const patientSignUpBtn = document.getElementById('patientSignUpBtn');
 
   if (patientSignUpBtn){
-    patientBtn.addEventListener('click', () => openModal('patientSignUp2'));
+   // patientBtn.addEventListener('click', () => openModal('patientSignUp2'));
   }
 };
+window.dan= function(){
+    openModal("patientSignup2");
+}
 //
 window.adminLoginHandler = async function () {
     const username = document.getElementById("adminUsername").value;

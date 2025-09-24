@@ -44,7 +44,7 @@ export function openModal(type) {
         <input type="password" id="patientPassword" placeholder="Password" class="input-field">
         <button class="dashboard-btn" id="patientLoginBtn">Login</button>
         New patient? 
-        <button class="dashboard-btn" id="patientSignUpBtn>SignUp</button>
+        <button class="dashboard-btn" id="patientSignUpBtn" onclick="dan()" >SignUp</button>
       `;
   }
   else if (type === "patientSignup") {
@@ -75,7 +75,7 @@ export function openModal(type) {
       `;
   }
   
-  if (type === "patientSignUp2"){
+  if (type === "patientSignup2"){ window.alert("i am tiered");
     modalContent = `
     <h2>Patient Signup</h2>
     <input type="text" id="patientName" placeholder="Name" class="input-field">
@@ -102,7 +102,7 @@ export function openModal(type) {
   if (type === "patientLogin") {
     //document.getElementById("patientLoginBtn").addEventListener("click", loginPatient);
     document.getElementById("patientLoginBtn").addEventListener("click", patientLoginHandler);
-    //document.getElementById("patientSignUpBtn").addEventListener("click", );
+    document.getElementById("patientSignUpBtn").addEventListener("click", dan);
   }
   if (type === 'addDoctor') {
     document.getElementById('saveDoctorBtn').addEventListener('click', adminAddDoctor);
@@ -117,6 +117,6 @@ export function openModal(type) {
   }
   
   if (type === "patientSignup2") {
-    document.getElementById("signupBtn").addEventListener("click", signupPatient);
-  }
+    document.getElementById("patientSsigUupBtn").addEventListener("click", signupPatient);
+ }
 }

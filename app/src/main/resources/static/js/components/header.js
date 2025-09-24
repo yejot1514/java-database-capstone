@@ -216,16 +216,17 @@ function attachHeaderButtonListeners() {
     logoutPatientBtn.addEventListener("click", logoutPatient);
   }
 
-  const loginBtn = document.getElementById("patientLogin");
-  if (loginBtn) {
-    loginBtn.addEventListener("click", () => openModal("patientLogin"));
-  }
+//  const loginBtn = document.getElementById("patientLogin");
+ // if (loginBtn) {
+ //   loginBtn.addEventListener("click", () => openModal("patientLogin"));
+ // }
 
-  const signupBtn = document.getElementById("patientSignup");
-  if (signupBtn) {
-    signupBtn.addEventListener("click", () => openModal("patientSignup"));
-  }
+ // const signupBtn = document.getElementById("patientSignup");
+ // if (signupBtn) {
+ //   signupBtn.addEventListener("click", () => openModal("patientSignup"));
+  //}
 }
 
 // Call renderHeader on page load
-window.addEventListener("DOMContentLoaded", renderHeader);
+//window.addEventListener("DOMContentLoaded", renderHeader);
+renderHeader();
