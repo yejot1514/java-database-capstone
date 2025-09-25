@@ -122,6 +122,8 @@
 
   16. **Render the Header**: Finally, the `renderHeader()` function is called to initialize the header rendering process when the page loads.
 */
+//import { openModal } from "./modals";
+
 function renderHeader() {
   const headerDiv = document.getElementById("header");
 
@@ -216,16 +218,19 @@ function attachHeaderButtonListeners() {
     logoutPatientBtn.addEventListener("click", logoutPatient);
   }
 
-//  const loginBtn = document.getElementById("patientLogin");
- // if (loginBtn) {
- //   loginBtn.addEventListener("click", () => openModal("patientLogin"));
- // }
+  const loginBtn = document.getElementById("patientLogin");
+  if (loginBtn) { //window.alert("i see the login btn");
+    //loginBtn.addEventListener("click", () => han());
+  }
 
  // const signupBtn = document.getElementById("patientSignup");
  // if (signupBtn) {
  //   signupBtn.addEventListener("click", () => openModal("patientSignup"));
   //}
 }
+function han(){ 
+    window.alert("han");
+    openModal("patientLogin");}
 
 // Call renderHeader on page load
 //window.addEventListener("DOMContentLoaded", renderHeader);

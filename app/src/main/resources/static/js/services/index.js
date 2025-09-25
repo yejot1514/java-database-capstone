@@ -75,7 +75,7 @@ window.onload = function() {
   const patientBtn = document.getElementById('patientBtn');
   
 
-  if (adminBtn) {
+  if (adminBtn) { 
     //alert("admin button clicked");
     adminLoginBtn.addEventListener('click', () => openModal('adminLogin'));
   }
@@ -84,7 +84,8 @@ window.onload = function() {
     doctorBtn.addEventListener('click', () => openModal('doctorLogin'));
   }
   if (patientBtn){
-    patientBtn.addEventListener('click', () => openModal('patientLogin'));
+    //patientBtn.addEventListener('click', () => openModal('patientLogin'));
+    patientBtn.addEventListener('click', () => dan);
   }
   
   const patientSignUpBtn = document.getElementById('patientSignUpBtn');
@@ -94,7 +95,8 @@ window.onload = function() {
   }
 };
 window.dan= function(){
-    openModal("patientSignup2");
+    //openModal("patientSignup2");
+    selectRole("patient");
 }
 //
 window.adminLoginHandler = async function () {

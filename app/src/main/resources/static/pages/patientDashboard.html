@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="../assets/css/patientDashboard.css">
     <script src="../js/render.js" defer></script>
     <script src="../js/util.js" defer></script>
-    <script src="../js/components/header.js" defer></script>
+    <script type="module" src="../js/components/header.js" defer></script>
     <script src="../js/components/footer.js" defer></script>
     <script type="module" src="../js/components/modals.js"></script>
+    <!--<script type="module" src="../js/patientDashboard.js" defer></script>-->
 </head>
 
-<body onload="renderContent()">
+<body>
+
     <div class="container">
         <div class="wrapper">
             <div id="header"></div>
@@ -57,7 +59,7 @@
             <div id="modal-body"></div>
         </div>
     </div>
-    <script  src="../js/patientDashboard.js" defer></script>
+   <script type="module" src="../js/patientDashboard.js"></script>
 </body>
 
 </html>
