@@ -3,28 +3,28 @@
 ### Table: admin
 
 -admin_id: INT, Primary Key, Auto Increment<br>
--first_name: VARCHAR, Not Null<br>
--last_name: VARCHAR, Not Null<br>
--password: VARCHAR, Not Null<br>
+-username: VARCHAR(50), Not Null<br>, Unique
+-password: VARCHAR(50), Not Null<br>
 
 ### Table: patient
 -patient_id: INT, Primary Key, Auto Increment<br>
--first_name: VARCHAR, Not Null<br>
--last_name: VARCHAR, Not Null<br>
--password: VARCHAR, Not Null<br>
--dob: DATE, Not Null<br>
--gender: VARCHAR, Not Null<br>
--address: VARCHAR, Not Null<br>
--phone: VARCHAR<br>
--insurance_info: TEXT<br>
+-name: VARCHAR(100), Not Null<br>
+-email: VARCHAR(50), Not Null, Unique<br>
+-password: VARCHAR(50), Not Null<br>
+-date_of_birth: DATE, Not Null<br>
+-gender: VARCHAR(10), Not Null<br>
+-address: TEXT, Not Null<br>
+-phone: VARCHAR(20)<br>
 
 ### Table: doctor
 
 -doctor_id: INT, Primary Key, Auto Increment<br>
--first_name: VARCHAR, Not Null<br>
--last_name: VARCHAR, Not Null<br>
--password: VARCHAR, Not Null<br>
--specialization: VARCHAR, Not Null<br>
+-name: VARCHAR(100), Not Null<br>
+-email: VARCHAR(50), Not Null, Unique<br>
+-password: VARCHAR(50), Not Null<br>
+-phone: VARCHAR(20), Not Null, Unique<br>
+-specialization: VARCHAR(100), Not Null<br>
+-available_times: TEXT<br>
 
 ### Table: appointments
 
