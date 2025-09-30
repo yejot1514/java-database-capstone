@@ -72,13 +72,17 @@
 */
 import { getDoctors, saveDoctor, filterDoctors } from "./services/doctorServices.js";
 import { createDoctorCard } from "./components/doctorCard.js";
-import { openModal, closeModal } from "./components/modals.js";
-
+import { openModal } from "./components/modals.js";
+//closeModal
 // === Event Listener: Add Doctor Button ===
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.getElementById("addDocBtn");
   if (addBtn) {
     addBtn.addEventListener("click", () => openModal("addDoctor"));
+  }
+  const addBtn2 = document.getElementById("addDocBtn2");
+  if (addBtn2) {
+    addBtn2.addEventListener("click", () => openModal("addDoctor"));
   }
 
   // Load all doctors initially

@@ -101,8 +101,10 @@ export function openModal(type) {
 
   if (type === "patientLogin") {
     alert("what happened?");
-    //document.getElementById("patientLoginBtn").addEventListener("click", loginPatient);
+    document.getElementById("patientLoginBtn").addEventListener("click", loginPatient);
     document.getElementById("patientLoginBtn").addEventListener("click", patientLoginHandler);
+    //document.getElementById("patientLoginBtn").addEventListener("click", patientLoginHandler);
+    
     //document.getElementById("patientSignUpBtn").addEventListener("click", dan);
   }
   if (type === 'addDoctor') {

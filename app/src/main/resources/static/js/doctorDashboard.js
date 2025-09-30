@@ -53,7 +53,7 @@
     - Call loadAppointments() to display today's appointments by default
 */
 import { getAllAppointments } from "./services/appointmentRecordService.js";
-import { createPatientRow } from "./components/patientdRow.js";
+import { createPatientRow } from "./components/patientdRows.js";
 
 
 const tableBody = document.getElementById("patientTableBody");
