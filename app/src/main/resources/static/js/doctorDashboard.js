@@ -53,7 +53,7 @@
     - Call loadAppointments() to display today's appointments by default
 */
 import { getAllAppointments } from "./services/appointmentRecordService.js";
-import { createPatientRow } from "./components/patientdRows.js";
+import { createPatientRow } from "./components/patientRows.js";
 
 
 const tableBody = document.getElementById("patientTableBody");
@@ -92,22 +92,24 @@ if (datePicker) {
 
 async function loadAppointments() {
   try {
-    const appointments = await getAllAppointments(selectedDate, patientName, token);
+    const appointments1 = await getAllAppointments(selectedDate, patientName, token);
+    window.alert(typeof appointments1);
     tableBody.innerHTML = "";
 
-    if (!appointments || appointments.length === 0) {
+    if (!appointments1 || appointments1.length === 0) {
       tableBody.innerHTML = `<tr><td colspan="5" class="noPatientRecord">No Appointments found for today.</td></tr>`;
       return;
     }
-
-    appointments.forEach(app => {
+    if(appointments1.length > 1){ window.alert("length more than one");}
+    //const appointment = appointments1.appointments;
+    appointments1.forEach(app => { window.alert("in aptmt loop");
       const patient = {
-        id: app.patient?.id,
-        name: app.patient?.name,
-        email: app.patient?.email,
-        phone: app.patient?.phone
+        id: app.patientId,
+        name: app.patientName,
+        email: app.patientEmail,
+        phone: app.patientPhone
       };
-      const row = createPatientRow(app, patient);
+      const row = createPatientRow(patient, app.id, app.doctorId);
       tableBody.appendChild(row);
     });
   } catch (err) {

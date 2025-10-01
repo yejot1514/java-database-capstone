@@ -119,9 +119,10 @@ public final TokenService tokenService;
         Map<String, String> response = new HashMap<>();
         if (!tokenService.validateToken(token, user)) {
             response.put("error", "Invalid or expired token");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-    }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+        }
 
    
     //public ResponseEntity<?> validateAdmin(String username, String password) {

@@ -114,9 +114,9 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
         <script type="module" th:src="@{/js/util.js}" defer></script>
         <script type="module" th:src="@{/js/components/header.js}" defer></script>
         <script type="module" th:src="@{/js/components/footer.js}" defer></script>
-        <script type="module" th:src="@{/js/components/patientRows.js}" defer></script>
+        
         <script type="module" th:src="@{/js/services/patientServices.js}" defer></script>
-        <script type="module" th:src="@{/js/doctorDashboard.js}" defer></script>
+        
     </head>
     <body onload="renderContent()">
         <div class="container">
@@ -146,5 +146,7 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
                 <div id="footer"></div>
             </div>
         </div>
+        <script type="module" th:src="@{/js/components/patientRows.js}" defer></script>
+        <script type="module" th:src="@{/js/doctorDashboard.js}" defer></script>
     </body>
 </html>    
