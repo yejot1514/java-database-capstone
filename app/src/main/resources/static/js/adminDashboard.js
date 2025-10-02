@@ -106,12 +106,12 @@ async function loadDoctorCards() {
 
 //
 async function filterDoctorsOnChange() {
-    const name = document.getElementById('searchDoctor')?.value || null;
-    const time = document.getElementById('timeFilter')?.value || null;
-    const specialty = document.getElementById('specialtyFilter')?.value || null;
+    const name = document.getElementById('searchBar')?.value.trim() || "";
+    const time = document.getElementById('filterTime')?.value || "";
+    const specialty = document.getElementById('filterSpecialty')?.value || "";
   
     try {
-      const result = await filterDoctors(name || 'null', time || 'null', specialty || 'null');
+      const result = await filterDoctors(name , time , specialty );
       if (result.doctors && result.doctors.length > 0) {
         renderDoctorCards(result.doctors);
       } else {
@@ -134,27 +134,38 @@ function renderDoctorCards(doctors) {
   });
 }
 
-window.adminAddDoctor = async () => {
-    const name = document.getElementById('doctorName').value;
-    const email = document.getElementById('doctorEmail').value;
-    const phone = document.getElementById('doctorPhone').value;
-    const password = document.getElementById('doctorPassword').value;
-    const specialty = document.getElementById('doctorSpecialty').value;
-    const availableTimes = document.getElementById('doctorTimes').value.split(',').map(t => t.trim());
-  
+window.adminAddDoctor = async function () { alert("in adminAddDoc");
+    const name = document.getElementById('doctorName')?.value.trim();alert("after name in adminAddDoc");
+            const email = document.getElementById('doctorEmail')?.value.trim();alert("after email in adminAddDoc");
+    const phone = document.getElementById('doctorPhone')?.value.trim(); alert("after phone in adminAddDoc");
+    const password = document.getElementById('doctorPassword')?.value.trim(); alert("after password in adminAddDoc");
+    const specialty = document.getElementById('specialization')?.value.trim();alert("after specialty in adminAddDoc");
+    const checkboxes = document.querySelectorAll('input[name="availability"]:checked');//?.value.trim();
+    alert("after checkbox");
+    //const availableTimes = document.getElementById('doctorTimes').value.split(',').map(t => t.trim());
+    
     const token = localStorage.getItem('token');
     if (!token) {
       alert('Authentication token not found. Please log in again.');
       return;
     }
-  
-    const doctor = { name, email, phone, password, specialty, availableTimes };
+    if (!name || !email || !phone || !password || !specialty || !checkboxes) {
+        alert("Please fill in all fields.");
+        return;
+      }
+    const availableTimes1 = Array.from(checkboxes).map(checkbox => checkbox.value);alert("after availableTimes");
+    //  const availableTimes = checkboxes.split(",").map(t => t.value.trim()); 
+    //const availableTimes = {};
+    //availableTimes1.forEach((value, index) => {
+    //    availableTimes[index] = value;
+    //});
+    const doctor = { name, email, phone, password, specialty, availableTimes1 };
   
     try {
       const result = await saveDoctor(doctor, token);
       if (result.success) {
         alert('Doctor added successfully!');
-        document.getElementById('addDoctorModal').style.display = 'none';
+        document.getElementById('modal').style.display = 'none';
         loadDoctorCards();
       } else {
         alert(`Failed to add doctor: ${result.message}`);

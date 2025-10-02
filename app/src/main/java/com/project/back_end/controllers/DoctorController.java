@@ -114,7 +114,7 @@ public class DoctorController {
     }
 
     
-    @PostMapping("/add/{token}")
+    @PostMapping("/{token}")
     public ResponseEntity<Map<String, String>> saveDoctor(
             @RequestBody @Valid Doctor doctor,
             @PathVariable String token
