@@ -106,7 +106,7 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
         <title>doctor Dashboard</title>
         <link rel="icon" type="image/png" th:href="@{/assets/images/logo/logo.png}" />
 
-        <!-- <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}" /> -->
+        <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}" /> 
         <link rel="stylesheet" th:href="@{/assets/css/doctorDashboard.css}" />
         <link rel="stylesheet" th:href="@{/assets/css/style.css}" />
 
@@ -114,9 +114,9 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
         <script type="module" th:src="@{/js/util.js}" defer></script>
         <script type="module" th:src="@{/js/components/header.js}" defer></script>
         <script type="module" th:src="@{/js/components/footer.js}" defer></script>
-        
+        <script type="module" th:src="@{/js/components/patientRows.js}" defer></script>
         <script type="module" th:src="@{/js/services/patientServices.js}" defer></script>
-        
+        <script type="module" th:src="@{/js/doctorDashboard.js}" defer></script>
     </head>
     <body onload="renderContent()">
         <div class="container">
@@ -125,7 +125,7 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
                 <div class="main-content">
                     <input type="text" id="searchBar" class="searchBar" placeholder="Search patients..." />
                     <div class="filter-section">
-                        <button id="todayButton" class="adminBtn">Today’s Appointments</button>
+                        <button id="todayButton" class="adminBtn" style="font-size:small;">Today’s Appointments</button>
                         <input type="date" id="datePicker" class="datePicker" />
                     </div>
                     <table id="patientTable" class="patient-table">
@@ -146,7 +146,7 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
                 <div id="footer"></div>
             </div>
         </div>
-        <script type="module" th:src="@{/js/components/patientRows.js}" defer></script>
-        <script type="module" th:src="@{/js/doctorDashboard.js}" defer></script>
+        
+        
     </body>
 </html>    

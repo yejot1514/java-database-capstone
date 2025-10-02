@@ -61,7 +61,8 @@ export function createDoctorCard(doctor) {
   name.textContent = doctor.name;
 
   const specialization = document.createElement("p");
-  specialization.textContent = `Specialization: ${doctor.specialization}`;
+  //specialization.textContent = `Specialization: ${doctor.specialization}`;
+  specialization.textContent = `Specialization: ${doctor.specialty}`;
 
   const email = document.createElement("p");
   email.textContent = `Email: ${doctor.email}`;

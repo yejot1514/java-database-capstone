@@ -171,10 +171,11 @@ button:hover {
   padding: 10px 0;
   border: none;
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
 }
 
 .adminBtn:hover {
-  color: #A62B1F;
+  color: #a62a1f8e;
 }
 
 #content {

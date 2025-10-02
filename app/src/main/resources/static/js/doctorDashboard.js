@@ -55,11 +55,12 @@
 import { getAllAppointments } from "./services/appointmentRecordService.js";
 import { createPatientRow } from "./components/patientRows.js";
 
-
+//document.addEventListener("DOMContentLoaded", () => {
 const tableBody = document.getElementById("patientTableBody");
 const token = localStorage.getItem("token");
 let selectedDate = new Date().toISOString().split("T")[0]; // today's date in YYYY-MM-DD
 let patientName = null;
+
 
 
 const searchBar = document.getElementById("searchBar");
@@ -118,10 +119,10 @@ async function loadAppointments() {
   }
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
-  renderContent(); 
-  loadAppointments(); 
-});
+    renderContent(); 
+    loadAppointments(); 
+  });
 
+loadAppointments();
 
