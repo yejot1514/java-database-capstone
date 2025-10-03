@@ -62,8 +62,11 @@ public class Prescription {
       private String doctorNotes;
 // 7. Constructors:
 //    - The class includes a no-argument constructor (default constructor) and a parameterized constructor that initializes the fields: patientName, medication, dosage, doctorNotes, and appointmentId.
-      public Prescription(String patientName, String medication, String dosage, String doctorNotes){
+      public Prescription() {}
+  
+      public Prescription(String patientName, Long appointmentId, String medication, String dosage, String doctorNotes){
         this.patientName = patientName;
+        this.appointmentId = appointmentId;
         this.medication = medication;
         this.dosage = dosage;
         this.doctorNotes = doctorNotes;
