@@ -76,6 +76,11 @@ h2 {
   font-family: 'Alegreya', 'Roboto', sans-serif;
 }
 
+.container h2 span {
+    color: #A62B1F;
+  }
+
+
 .main-content {
   flex-grow: 1;
   padding: 40px;
