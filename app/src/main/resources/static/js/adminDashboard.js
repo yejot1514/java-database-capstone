@@ -136,7 +136,7 @@ function renderDoctorCards(doctors) {
 
 window.adminAddDoctor = async function () { //alert("in adminAddDoc");
     const name = document.getElementById('doctorName')?.value.trim();//alert("after name in adminAddDoc");
-            const email = document.getElementById('doctorEmail')?.value.trim();//alert("after email in adminAddDoc");
+    const email = document.getElementById('doctorEmail')?.value.trim();//alert("after email in adminAddDoc");
     const phone = document.getElementById('doctorPhone')?.value.trim(); //alert("after phone in adminAddDoc");
     const password = document.getElementById('doctorPassword')?.value.trim(); //alert("after password in adminAddDoc");
     const specialty = document.getElementById('specialization')?.value.trim();//alert("after specialty in adminAddDoc");
