@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
   const urlParams = new URLSearchParams(window.location.search);
-  const appointmentId = urlParams.get("appointmentId");
+  const appointmentId1 = urlParams.get("appointmentId");
   const mode = urlParams.get("mode");
   const token = localStorage.getItem("token");
   const patientName = urlParams.get("patientName")
@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // Fetch and pre-fill existing prescription if it exists
-  if (appointmentId && token) {
+  if (appointmentId1 && token) {
     try {
-      const response = await getPrescription(appointmentId, token);
+      const response = await getPrescription(appointmentId1, token);
       console.log("getPrescription :: ", response);
 
       // Now, check if the prescription exists in the response and access it from the array
@@ -62,12 +62,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const prescription = {
       patientName: patientNameInput.value,
+      appointmentId: Number(appointmentId1),
       medication: medicinesInput.value,
       dosage: dosageInput.value,
-      doctorNotes: notesInput.value,
-      appointmentId
+      doctorNotes: notesInput.value
+      
     };
-
+    //alert(typeof appointmentId1);
     const { success, message } = await savePrescription(prescription, token);
 
     if (success) {

@@ -229,7 +229,7 @@ function attachHeaderButtonListeners() {
   //}
 }
 function han(){ 
-    window.alert("han");
+   // window.alert("han");
     openModal("patientLogin");}
 
 // Call renderHeader on page load

@@ -54,6 +54,9 @@ public class PrescriptionService {
     {
         Map<String, String> map=new HashMap<>();
         try{
+            //if(prescription.getAppointmentId() == null){
+            //map.put("message", "prescription.getAppointmentId() null");
+            //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);}
             List<Prescription> result=prescriptionRepository.findByAppointmentId(prescription.getAppointmentId());
             if(result.isEmpty())
             {
@@ -67,7 +70,10 @@ public class PrescriptionService {
         }
         catch(Exception e)
         {
-            map.put("message","Internal Server Error");
+            //map.put("message","Internal Server Error"+ prescription.getAppointmentId());
+            e.printStackTrace(); // This will show the real error in the console
+            map.put("message", "Internal Server Error: " + e.getMessage());
+        
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
         }
     }

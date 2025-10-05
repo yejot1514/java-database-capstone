@@ -75,7 +75,7 @@ export function openModal(type) {
       `;
   }
   
-  if (type === "patientSignup2"){ //window.alert("i am tired");
+  if (type === "patientSignup2"){ 
     modalContent = `
     <h2>Patient Signup</h2>
     <input type="text" id="patientNames" placeholder="Name" class="input-field">
@@ -100,7 +100,7 @@ export function openModal(type) {
   }
 
   if (type === "patientLogin") {
-    //alert("what happened?");
+    //
     document.getElementById("patientLoginBtn").addEventListener("click", loginPatient);
     document.getElementById("patientLoginBtn").addEventListener("click", patientLoginHandler);
     //document.getElementById("patientLoginBtn").addEventListener("click", patientLoginHandler);

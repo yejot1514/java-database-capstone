@@ -8,7 +8,7 @@ import { patientSignup, patientLogin } from './services/patientServices.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   loadDoctorCards();
- window.alert("patdash");
+ //window.alert("patdash");
 });
 
 document.addEventListener("DOMContentLoaded", () => {

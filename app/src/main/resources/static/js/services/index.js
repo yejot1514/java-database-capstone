@@ -101,7 +101,7 @@ window.dan= function(){
 //
 window.adminLoginHandler = async function () {
     const username = document.getElementById("adminUsername").value;
-    alert("you entered " + username);
+    //alert("you entered " + username);
     const password = document.getElementById("adminPassword").value;
   
     if (!username || !password) {
@@ -110,7 +110,7 @@ window.adminLoginHandler = async function () {
     }
   
     const admin = { username, password };
-    alert("your password is " + password);
+  
     try {
         alert(ADMIN_API);
       const response = await fetch(ADMIN_API, {

@@ -79,7 +79,7 @@ export function createDoctorCard(doctor) {
   const actionsDiv = document.createElement("div");
   actionsDiv.classList.add("card-actions");
 
-  // === Admin Role ===
+  //
   if (role === "admin") {
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "Delete";
@@ -109,7 +109,7 @@ export function createDoctorCard(doctor) {
     actionsDiv.appendChild(removeBtn);
   }
 
-  // === Patient (not logged in) ===
+  // 
   else if (role === "patient") {
     const bookNow = document.createElement("button");
     bookNow.textContent = "Book Now";
@@ -122,7 +122,7 @@ export function createDoctorCard(doctor) {
     actionsDiv.appendChild(bookNow);
   }
 
-  // === Logged-in Patient ===
+  // 
   else if (role === "loggedPatient") {
     const bookNow = document.createElement("button");
     bookNow.textContent = "Book Now";

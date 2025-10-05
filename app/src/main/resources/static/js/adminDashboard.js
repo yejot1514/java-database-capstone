@@ -73,8 +73,8 @@
 import { getDoctors, saveDoctor, filterDoctors } from "./services/doctorServices.js";
 import { createDoctorCard } from "./components/doctorCard.js";
 import { openModal } from "./components/modals.js";
-//closeModal
-// === Event Listener: Add Doctor Button ===
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.getElementById("addDocBtn");
   if (addBtn) {
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("filterSpecialty")?.addEventListener("change", filterDoctorsOnChange);
 });
 
-// === Load and Display All Doctor Cards ===
+
 async function loadDoctorCards() {
   try {
     const doctors = await getDoctors();
@@ -134,14 +134,14 @@ function renderDoctorCards(doctors) {
   });
 }
 
-window.adminAddDoctor = async function () { alert("in adminAddDoc");
-    const name = document.getElementById('doctorName')?.value.trim();alert("after name in adminAddDoc");
-            const email = document.getElementById('doctorEmail')?.value.trim();alert("after email in adminAddDoc");
-    const phone = document.getElementById('doctorPhone')?.value.trim(); alert("after phone in adminAddDoc");
-    const password = document.getElementById('doctorPassword')?.value.trim(); alert("after password in adminAddDoc");
-    const specialty = document.getElementById('specialization')?.value.trim();alert("after specialty in adminAddDoc");
+window.adminAddDoctor = async function () { //alert("in adminAddDoc");
+    const name = document.getElementById('doctorName')?.value.trim();//alert("after name in adminAddDoc");
+            const email = document.getElementById('doctorEmail')?.value.trim();//alert("after email in adminAddDoc");
+    const phone = document.getElementById('doctorPhone')?.value.trim(); //alert("after phone in adminAddDoc");
+    const password = document.getElementById('doctorPassword')?.value.trim(); //alert("after password in adminAddDoc");
+    const specialty = document.getElementById('specialization')?.value.trim();//alert("after specialty in adminAddDoc");
     const checkboxes = document.querySelectorAll('input[name="availability"]:checked');//?.value.trim();
-    alert("after checkbox");
+    //alert("after checkbox");
     //const availableTimes = document.getElementById('doctorTimes').value.split(',').map(t => t.trim());
     
     const token = localStorage.getItem('token');

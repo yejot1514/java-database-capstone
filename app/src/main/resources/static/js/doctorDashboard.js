@@ -94,16 +94,16 @@ if (datePicker) {
 async function loadAppointments() {
   try {
     const appointments1 = await getAllAppointments(selectedDate, patientName, token);
-    window.alert(typeof appointments1);
+    //window.alert(typeof appointments1);
     tableBody.innerHTML = "";
 
     if (!appointments1 || appointments1.length === 0) {
       tableBody.innerHTML = `<tr><td colspan="5" class="noPatientRecord">No Appointments found for today.</td></tr>`;
       return;
     }
-    if(appointments1.length > 1){ window.alert("length more than one");}
+    //if(appointments1.length > 1){ window.alert("length more than one");}
     //const appointment = appointments1.appointments;
-    appointments1.forEach(app => { window.alert("in aptmt loop");
+    appointments1.forEach(app => { //window.alert("in aptmt loop");
       const patient = {
         id: app.patientId,
         name: app.patientName,
@@ -115,7 +115,7 @@ async function loadAppointments() {
     });
   } catch (err) {
     console.error("Error loading appointments:", err);
-    tableBody.innerHTML = `<tr><td colspan="5" class="noPatientRecord">Error loading appointments. Pleaset ry again later.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="5" class="noPatientRecord">Error loading appointments. Please try again later.</td></tr>`;
   }
 }
 

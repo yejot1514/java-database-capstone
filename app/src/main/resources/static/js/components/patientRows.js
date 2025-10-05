@@ -1,6 +1,6 @@
 // patientRows.js
 export function createPatientRow(patient, appointmentId, doctorId) {
-  const tr = document.createElement("tr"); alert("table row was created");
+  const tr = document.createElement("tr"); //alert("table row was created");
   console.log("CreatePatientRow :: ", doctorId)
   tr.innerHTML = `
       <td class="patient-id">${patient.id}</td>
