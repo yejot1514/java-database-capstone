@@ -3,7 +3,7 @@
 ### Table: admin
 
 -admin_id: INT, Primary Key, Auto Increment<br>
--username: VARCHAR(50), Not Null<br>, Unique
+-username: VARCHAR(50), Not Null, Unique<br>
 -password: VARCHAR(50), Not Null<br>
 
 ### Table: patient
